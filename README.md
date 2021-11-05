@@ -4,6 +4,6 @@ The goal of this project is to detect fraudulent transactions in a real world da
 ## Approach
 Since our focus is on credit card purhcases, we removed any transcations that were marked otherwise (such as card activation, refund etc.).
 ### Data Preprocessing
-After inspecting the dataset, we noticed that a lot of values were missing 
+After inspecting the dataset, we noticed that more than 8,000 values were missing 
 ### Feature Engineering 
 ## Results
