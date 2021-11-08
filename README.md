@@ -17,7 +17,7 @@ For fraud detection we used 4 models: Logistic regression, Boodted Trees, Neural
 | Neural Network | 0.6854 | 0.6831 | 0.5911 |
 | Random Forests | 0.8635 | 0.8333 | 0.5815 |  
 
-Seemingly the above models are overfit since the training and test set results are significantly higher than the validation ones. Therefore, we tried altering the model paramters to generalize the models and reduce the overfit, but this led to significantly lower (more than 5%) validation set FDR. Finally, we chose as our final model the random forest, since it produced on average better test set results, with lower variance. The averrage 10-fold cross validation results for our final model were the following:  
+Seemingly the above models are overfit since the training and test set results are significantly higher than the validation ones. Therefore, we tried altering the model paramters to generalize the models and reduce the overfit, but this led to significantly lower (more than 5%) validation set FDR. Finally, we chose as our final model the random forest, since it produced on average better test set results, with lower variance. The averrage 10-fold cross validation results for our final model after hyperparameter tuning were the following:  
 
 | Model | Training | Test | OOT |
 |---|---|---|---|
@@ -25,4 +25,12 @@ Seemingly the above models are overfit since the training and test set results a
 
 ## Final Model Analysis
 Based on the results of our model, we wanted to find an optimal cutoff point for the FDR, i.e. any transaction with a score above the threshold at that cutoff point would be classified as fraudulent. A low cutoff point would mean that we would detect a lot of fraudulent transactions, but also misclassify non-fraudulent ones as frauds (false-positive, FP). Similarly, a high cutoff point would not detect many frauds, but would also misclassify a small number of transactions. Assuming $2,000 gain for every fraud that is detected (TP) and $50 loss for every non-fraud that is flagged as a fraud (FP), we plotted the Fraud Savings (blue), the Lost Sales (orange) and the Fraud Savings (green) for the out of time dataset. According to our analysis, we recommend a cutoff point at 5% as this threshold maximizes the profits (P) calculated as follows: P = 2000*TP - 50*FP. 
+
+![image](https://user-images.githubusercontent.com/39418469/140681513-c732c283-dafa-4e5e-99bf-d93c12cc7f31.png)
+
+From our analysis and interpretation of our model's results, we found there was a correlation between transaction counts and fraud scores. When there is a burst of transaction activity, the fraud score rises rapidly. We illustrate this with the “Cardnum” value of “5142235211” in the following plot. There was a burst of activity on 11/25/2010 containing 18 transactions and an additional 15 transactions on 11/26/2010. From the graph above, we can see the fraud score rose steeply in accordance with the time period.
+
+![image](https://user-images.githubusercontent.com/39418469/140683111-01734def-d893-4af7-9678-bc29346bea70.png)
+
+
 
